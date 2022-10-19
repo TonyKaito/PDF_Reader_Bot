@@ -3,7 +3,6 @@ import discord
 from discord.ext import tasks
 from pdf_handler import *
 from json_handler import *
-from keep_alive import keep_alive
 
 # with open('data.json', 'r') as x:
 #   # Reading from json file
@@ -131,5 +130,4 @@ async def on_message(message):
       await message.channel.send("No File was Attached.")
   
     
-keep_alive()
 client.run(os.environ['discord_key'])
