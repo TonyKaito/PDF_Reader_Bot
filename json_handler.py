@@ -57,6 +57,10 @@ def get_page_info(json_dict, guildID):
   return json_dict[str(guildID)]["BookQueue"][0][1:4]
 
 
+def get_interval(json_dict, guildID):
+  return json_dict[str(guildID)]["LoopInterval"]
+
+
 def next_page(json_dict, guildID):
   json_dict[str(guildID)]["BookQueue"][0][3] += 1
 
@@ -64,11 +68,16 @@ def next_page(json_dict, guildID):
 
 
 def get_book_list(json_dict, guildID):
-  return json_dict[str(guildID)]["BookQueue"][:][1:3]
+  size = len(json_dict[str(guildID)]["BookQueue"])
+  book_list = []
+  for i in range(0, size):
+    book_list.append(json_dict[str(guildID)]["BookQueue"][i][1:5])
+    
+  return book_list
 
 
 def set_interval(json_dict, guildID, interval):
-  json_dict[str(guildID)]["Interval"] = interval
+  json_dict[str(guildID)]["LoopInterval"] = interval
 
   update_file(json_dict, './data.json')
 

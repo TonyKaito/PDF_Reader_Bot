@@ -9,10 +9,17 @@ def pdf_to_img(url, page_no):
   
   dpi = 300  # choose desired dpi here
   zoom = dpi / 72  # zoom factor, standard: 72 dpi
-  magnify = fitz.Matrix(zoom, zoom)  # magnifies in x, resp. y direction
+  try:
+    magnify = fitz.Matrix(zoom, zoom)  # magnifies in x, resp. y direction
+  except Exception as error:
+    print("Who knows? lol")
+    
   doc = fitz.open(stream=filestream)  # open document
+
+  
   
   pix = doc.get_page_pixmap(page_no, matrix=magnify)
+  print("hello world")
   data = io.BytesIO(pix.tobytes())
   return data
 
